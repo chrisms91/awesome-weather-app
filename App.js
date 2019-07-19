@@ -28,7 +28,6 @@ export default class App extends Component {
     fetch(url)
       .then(response => response.json())
       .then(json => {
-        console.log(json);
         this.setState({
           temperature: json.main.temp,
           name: json.weather[0].main,
@@ -36,7 +35,9 @@ export default class App extends Component {
         });
       })
       .catch(err => {
-        console.log(err);
+        this.setState({
+          error: err
+        });
       });
   };
   render() {
