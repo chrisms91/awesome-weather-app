@@ -7,6 +7,8 @@ const API_KEY = '8042367a40d903407a2eee2c0cfa759a';
 export default class App extends Component {
   state = {
     isLoaded: false,
+    temperature: null,
+    name: null,
     error: null
   };
   componentDidMount() {
@@ -27,17 +29,22 @@ export default class App extends Component {
       .then(response => response.json())
       .then(json => {
         console.log(json);
+        this.setState({
+          temperature: json.main.temp,
+          name: json.weather[0].main,
+          isLoaded: true
+        });
       })
       .catch(err => {
         console.log(err);
       });
   };
   render() {
-    const { isLoaded, error } = this.state;
+    const { isLoaded, error, temperature, name } = this.state;
     return (
       <View style={styles.container}>
         {isLoaded ? (
-          <Weather />
+          <Weather temp={Math.ceil(temperature - 273.15)} weatherName={name} />
         ) : (
           <View style={styles.loading}>
             <Text style={styles.loadingText}>Getting the fucking weather</Text>
