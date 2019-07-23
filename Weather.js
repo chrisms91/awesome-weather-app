@@ -67,7 +67,7 @@ const weatherCases = {
   }
 };
 
-function Weather({ temp, weatherName }) {
+function Weather({ temp, weatherName, cityName }) {
   return (
     <LinearGradient
       colors={weatherCases[weatherName].colors}
@@ -80,7 +80,7 @@ function Weather({ temp, weatherName }) {
           size={144}
           name={weatherCases[weatherName].icon}
         />
-
+        <Text style={styles.city}>{cityName}</Text>
         <Text style={styles.temp}>{temp}˚</Text>
       </View>
       <View style={styles.lower}>
@@ -131,9 +131,14 @@ const styles = StyleSheet.create({
   },
   temp: {
     fontSize: 38,
-    color: 'white'
+    color: 'white',
+    marginTop: 5
   },
   icon: {
     marginTop: 200
+  },
+  city: {
+    fontSize: 38,
+    color: 'white'
   }
 });
